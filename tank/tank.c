@@ -1,6 +1,7 @@
 #include "struct.h"
 #include "header.h"
 #include <windows.h>
+#include <stdio.h>
 
 //position为坦克生成位置,-1为左位置,0为中间,1为右,2为我的坦克位置
 void BuildAITank(int* position, Tank* AI_tank)   //执行一次该函数只建立一个坦克
@@ -10,7 +11,7 @@ void BuildAITank(int* position, Tank* AI_tank)   //执行一次该函数只建�
 	{
 		AI_tank->x= 20 + 18*(*position);  //20 + 18 * position 对应三个生成位置的x假坐标
 		AI_tank->y=2;
-		if(AI_tank->revive==level_info[level-1].firm_tank_order)  //坦克出现(复活)次序==关卡信息(level_info)中firm tank的出现次序
+		if(AI_tank->revive==(level_info[level-1]).firm_tank_order)  //坦克出现(复活)次序==关卡信息(level_info)中firm tank的出现次序
 		{
 			AI_tank->model = 3;           //3为firm tank的模型(外观)
 			AI_tank->color = 2;           //颜色参数2为绿色，具体详见函数ColorChoose

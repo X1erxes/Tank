@@ -1,15 +1,13 @@
 #include <stdio.h>
 #include <windows.h>
 #include <time.h>
+#include "frame.h"
 #include "bullet.h"
 #include "tank.h"
-#include "define.h"
-#include "header.h"
-#include "struct.h"
 #include "map.h"
 #include "keyboard.h"
-#include "frame.h"
 #include "process.h"
+
 
                            //里规格：长39*2=78 （真坐标）(假坐标宽为39)  高39
                            //外规格：长41*2=82 （真坐标）(假坐标宽为41)  高41
@@ -40,8 +38,7 @@
 //注意map数组应是纵坐标在前，横坐标在后，既map[y][x]，(∵数组行长度在前，列长度在后)
 //map里的值: 个位数的值为地图方块部分，百位数的值为坦克,子弹在map上没有值(子弹仅仅是一个假坐标)
 //map里的值: 0为可通过陆地，1为红砖，2黄砖，5为水，100~103为敌方坦克，200为我的坦克，
- 
- 
+
  
 int main ()                               //主函数
 {

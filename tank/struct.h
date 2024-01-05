@@ -1,3 +1,8 @@
+#include "define.h"
+#ifndef STRUCT
+#define STRUCT
+
+
 typedef struct      //坦克结构体
 {
 	int x,y;        //坦克中心坐标
@@ -12,11 +17,13 @@ typedef struct      //坦克结构体
 	int alive;     //存活为1，不存活为0
 }  Tank;
 
+
 typedef struct             //这里的出现次序指的是一个AI_tank变量中的次序，游戏共有四个AI_tank变量
 {                          //∵设定每个AI_tank每种特殊坦克只出现一次 ∴fast_tank & firm_tank 最多出现次数不超过1
 	int fast_tank_order;   //fast_tank出现的次序(在第fast_tank_order次复活出现,从第0次开始)，且每个AI_tank只出现一次
 	int firm_tank_order;   //firm_tank出现的次序，同上
 } LevInfo;
+
 
 typedef struct      //子弹结构体
 {
@@ -26,3 +33,5 @@ typedef struct      //子弹结构体
 	int initial;   //子弹是否处于建立初状态的值，1为处于建立初状态，0为处于非建立初状态
 	int my;        //区分AI子弹与玩家子弹的标记,0为AI子弹，1为玩家（我的）子弹
 } Bullet;
+
+#endif

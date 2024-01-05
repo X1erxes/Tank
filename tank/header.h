@@ -1,41 +1,26 @@
+#ifndef HEADER
+#define HEADER
+
 #include "struct.h"
 #include "define.h"
 
 
-LevInfo level_info [MAX_LEVEL] = {{-1,-1},{3,-1},{-1,3},{2,3},{2,3},{2,3},{2,3},{2,3}};   //初始化，-1代表没有该类型坦克
-Bullet bullet [BULLET_NUM];  //考虑到地图上不太可能同时存在20颗子弹，所以数组元素设置20个
-Tank AI_tank[4] , my_tank;  //my_tank为我的坦克，Ai_tank 代表AI坦克
+extern LevInfo level_info[];
+extern Tank AI_tank[] , my_tank;
+extern Bullet bullet[];  //考虑到地图上不太可能同时存在20颗子弹，所以数组元素设置20个
+
 
 //全局变量
-int map[41][41];  //地图二维数组
-int key_x;        // X键是否被“读入”的变量，也是子弹是否可以发射的变，
-int bul_num;      //子弹编号
-int position;     //位置计数,对应AI坦克生成位置,-1为左位置,0为中间,1为右,2为我的坦克位置
-int speed=7;      //游戏速度,调整用
-int level=1;      //游戏关卡数
-int score=0;      //游戏分数
-int remain_enemy; //剩余敌人(未出现的敌人)
+extern int map[][41];  //地图二维数组
+extern int key_x;        // X键是否被“读入”的变量，也是子弹是否可以发射的变，
+extern int bul_num;      //子弹编号
+extern int position;     //位置计数,对应AI坦克生成位置,-1为左位置,0为中间,1为右,2为我的坦克位置
+extern int speed;      //游戏速度,调整用
+extern int level;      //游戏关卡数
+extern int score;      //游戏分数
+extern int remain_enemy; //剩余敌人(未出现的敌人)
 
-char *tank_figure[4][3][4]= 
-{
-  {
-    {"◢┃◣", "◢━◣", "◢┳◣", "◢┳◣"},
-    {"┣●┫", "┣●┫", "━●┃", "┃●━"},
-    {"◥━◤", "◥┃◤", "◥┻◤", "◥┻◤"}
-  }, 
-  {
-    {"┏┃┓", "┏┳┓", "┏┳┓", "┏┳┓"},
-    {"┣●┫", "┣●┫", "━●┫", "┣●━"},
-    {"┗┻┛", "┗┃┛", "┗┻┛", "┗┻┛"}
-  }, 
-  {
-    {"┏┃┓", "◢━◣", "┏┳◣", "◢┳┓"},
-    {"┣●┫", "┣●┫", "━●┃", "┃●━"},
-    {"◥━◤", "┗┃┛", "┗┻◤", "◥┻┛"}
-  },
-  {
-    {"╔┃╗", "╔╦╗", "╔╦╗", "╔╦╗"},
-    {"╠█╣", "╠█╣", "━█╣", "╠█━"},
-    {"╚╩╝", "╚┃╝", "╚╩╝", "╚╩╝"}
-  }
-};
+extern char *tank_figure[][3][4];
+
+
+#endif HEADER

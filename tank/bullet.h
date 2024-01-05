@@ -1,3 +1,5 @@
+#ifndef BULLET
+#define BULLET
 #include "struct.h"
 #include "define.h"
 
@@ -8,3 +10,4 @@ void BulletHit    (Bullet* bullet);            //子弹碰撞（人机共用）(
 void PrintBullet  (int x,int y,int T);         //打印子弹（人机共用）
 void ClearBullet  (int x,int y,int T);         //清除子弹（人机共用）
 int  BulletCheak  (int x,int y);               //判断子弹前方情况（人机共用）
+#endif
