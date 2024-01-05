@@ -1,0 +1,1 @@
+void keyboard ();            //接受键盘输入
