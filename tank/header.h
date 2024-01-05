@@ -1,6 +1,7 @@
 #include "struct.h"
 #include "define.h"
 
+
 LevInfo level_info [MAX_LEVEL] = {{-1,-1},{3,-1},{-1,3},{2,3},{2,3},{2,3},{2,3},{2,3}};   //初始化，-1代表没有该类型坦克
 Bullet bullet [BULLET_NUM];  //考虑到地图上不太可能同时存在20颗子弹，所以数组元素设置20个
 Tank AI_tank[4] , my_tank;  //my_tank为我的坦克，Ai_tank 代表AI坦克
