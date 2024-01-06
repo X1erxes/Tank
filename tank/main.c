@@ -43,50 +43,15 @@
  
 int main ()                               //主函数
 {
-	unsigned int interval[13]={1,1,1,1,1,1,1,1,1,1,1,1,1} ;  //间隔计数器数组，用于控制速度
 
 	srand(time(NULL)); //设置随机数种子(若不设置种子而调用rand会使每次运行的随机数序列一致)随机数序列指:如首次调用rand得到1,第二次得2,第三次3,则此次随机数序列为1,2,3
 	HideCursor();                         //隐藏光标
 	system("mode con cols=112 lines=43"); //控制窗口大小
-	//Frame ();                             //打印游戏主体框架
-	displaymenu(1);
-	scanf("%d");
-	//Initialize();                         //初始化，全局变量level初值便是1 
-
-
-	/*for(;;)
-	{
-		GameCheak();                  //游戏胜负检测
-		if(interval[0]++%speed==0)        //速度调整用,假设interval[0]为a, 语句意为 a % 2==0,a=a+1; 
-		{
-			BulletFly ( bullet );
-			for(int i=0 ; i<=3 ; i++)         //AI坦克移动循环
-			{
-				if(AI_tank[i].model==2 && interval[i+1]++%2==0) //四个坦克中的快速坦克单独使用计数器1,2,3,4
-					MoveAITank( & AI_tank[i]);
-				if(AI_tank[i].model!=2 && interval[i+5]++%3==0) //四个坦克中的慢速坦克单独使用计数器5,6,7,8
-					MoveAITank( & AI_tank[i]);
-			}
-			for(int i=0;i<=3;i++)                                   //建立AI坦克部分
-	  		   	if(AI_tank[i].alive==0 && AI_tank[i].revive<4 && interval[9]++%90==0)  //一个敌方坦克每局只有4条命
-				{                                               //如果坦克不存活。计时,每次建立有间隔  1750 ms
-             	  	BuildAITank( &position, & AI_tank[i] );     //建立AI坦克（复活）
-			  		break;                                      //每次循环只建立一个坦克
-		  		}
-			for(int i=0;i<=3;i++)
-				if(AI_tank[i].alive)
-					BuildAIBullet(&AI_tank[i]);                 //AIshoot自带int自增计数CD,不使用main中的CD interval
-		}
-    	if(my_tank.alive==0 && interval[10]++%100==0 && my_tank.revive < MAX_LIFE)
-     		BuildMyTank( &my_tank );
-		if(my_tank.alive && interval[11]++%6==0 )
-        	keyboardtank ();
-		if(my_tank.alive && interval[12]++%7==0 )
-         	keyboardbullet ();
-		
+	displaymenu();
+	while(1){
 		keyboardmenu();
-		Sleep(5);
-	}*/
+		Sleep(188);
+	}
 	return 0;
 }
  

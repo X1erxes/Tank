@@ -5,5 +5,5 @@
 #define MAX_LEVEL 8
 #define BULLET_NUM 20
 #define MAX_LIFE 4
-#define menu_num 2
+#define menu_num 4
 #define menu_length 10

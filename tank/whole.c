@@ -16,6 +16,7 @@ int level=1;      //游戏关卡数
 int score=0;      //游戏分数
 int remain_enemy; //剩余敌人(未出现的敌人)
 int state = 0;    //界面状态
+int sel = 1;      //
 
 char *tank_figure[4][3][4]= 
 {
@@ -43,5 +44,7 @@ char *tank_figure[4][3][4]=
 
 char MenuText[menu_num][menu_length]={
         "开始",
+        "载入",
+        "保存",
         "设置"
 };

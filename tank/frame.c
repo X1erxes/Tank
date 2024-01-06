@@ -108,10 +108,12 @@ void ColorChoose(int color)   //颜色选择函数
 
 void ClearMainScreen()  //主屏幕清屏函数，因使用system("cls");再打印框架有一定几率造成框架上移一行的错误，所以单独编写清屏函数
 {
-	for(int i=1;i<40;i++)
-	{
-		GoToxy(2,i);
-		printf("                                                                              ");
+	if(state == 2){
+		for(int i=1;i<40;i++)
+		{
+			GoToxy(2,i);
+			printf("                                                                              ");
+		}
 	}
 }
 
@@ -121,17 +123,39 @@ void HideCursor()  //隐藏光标
 	SetConsoleCursorInfo( GetStdHandle(STD_OUTPUT_HANDLE) , &cursor_info ); //SetConsoleCursorInfo用来设置指定的控制台光标的大小和可见性。
 }
 
-void displaymenu(int hilight){
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_INTENSITY);
-	printf("▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁");
+void displaymenu(){
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
+	printf("▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁");
+	for(int i=0;i<39;i++)
+	{
+	    printf("|                                                                                                              |");
+	}
+	printf("▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔");
+	GoToxy(50,16);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_RED|FOREGROUND_INTENSITY);
+	printf("经典坦克大战");
     GoToxy(45,17);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_INTENSITY);
     printf("  ==================  ");
+
     GoToxy(54,18);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_RED|FOREGROUND_BLUE|FOREGROUND_GREEN);
 	printf("%s",MenuText[0]);
 	GoToxy(54,19);
 	printf("%s",MenuText[1]);
-	GoToxy(45,20);
+	GoToxy(54,20);
+	printf("%s",MenuText[2]);
+	GoToxy(54,21);
+	printf("%s",MenuText[3]);
+	GoToxy(45,22);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_INTENSITY);
     printf("  ==================  ");
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE|FOREGROUND_RED|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
+	GoToxy(52,18);
+	printf("<<");
+	GoToxy(58,18);
+	printf(">>");
+	state = 0;
 }
 
 

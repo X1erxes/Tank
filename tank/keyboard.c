@@ -2,6 +2,7 @@
 
 #include "define.h"
 #include "whole.h"
+#include "frame.h"
 
 void keyboardtank ()
 {                       
@@ -35,31 +36,118 @@ void keyboardbullet (){
 }
 
 void keyboardmenu(){
-
-    if(GetAsyncKeyState( VK_UP ) && state == 0){
-        
-    }
-    
-    if (GetAsyncKeyState( 0x1B )& 0x8000){  // Esc键
-		exit(0);                                //退出程序函数
-    }
-	else if (GetAsyncKeyState( 0x20 )& 0x8000){  //空格
-		Stop();
-    }else	if (speed>1 && GetAsyncKeyState( VK_PRIOR )& 0x8000)   // PgUp键
-		{
-			Sleep(200);
-            speed--;
-			GoToxy(102,11);           //在副屏幕打印出当前速度
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY|FOREGROUND_BLUE|FOREGROUND_RED);
-			printf("%d ",11-speed);   //副屏幕显示的速度为1~10
+	if(state == 0){
+		if( GetAsyncKeyState( VK_DOWN )& 0x8000 ){
+			if(sel < menu_num){
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE|FOREGROUND_RED|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
+				GoToxy(52,17+sel);
+				printf("  ");
+				GoToxy(58,17+sel);
+				printf("  ");
+				sel++;
+				GoToxy(52,17+sel);
+				printf("<<");
+				GoToxy(58,17+sel);
+				printf(">>");
+			}
 		}
-		else if (speed<10 && GetAsyncKeyState( VK_NEXT )& 0x8000)  // PgDown 键
-		{
-			Sleep(200);
-            speed++;
-			GoToxy(102,11);           //在副屏幕打印出当前速度
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY|FOREGROUND_BLUE|FOREGROUND_RED);
-			printf("%d ",11-speed);   //副屏幕显示的速度为1~10
+		if(GetAsyncKeyState( VK_UP )& 0x8000 ){
+			if(sel > 1){
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE|FOREGROUND_RED|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
+				GoToxy(52,17+sel);
+				printf("  ");
+				GoToxy(58,17+sel);
+				printf("  ");
+				sel--;
+				GoToxy(52,17+sel);
+				printf("<<");
+				GoToxy(58,17+sel);
+				printf(">>");
+			}
+		}
+		if( GetAsyncKeyState( 0xD )& 0x8000 ){
+			if(sel == 1){
+				state = 2;
+				system("cls");
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
+				printf("新的玩家名:\n");
+				scanf("%s");
+				printf("按回车键开始游戏!");
+				getchar();
+				if( getchar() ){
+					unsigned int interval[13]={1,1,1,1,1,1,1,1,1,1,1,1,1} ;  //间隔计数器数组，用于控制速度
+					Frame ();                             //打印游戏主体框架
+					Initialize();                         //初始化，全局变量level初值便是1 
+					for(;;)
+					{
+						GameCheak();                  //游戏胜负检测
+						if(interval[0]++%speed==0)        //速度调整用,假设interval[0]为a, 语句意为 a % 2==0,a=a+1; 
+						{
+							BulletFly ( bullet );
+							for(int i=0 ; i<=3 ; i++)         //AI坦克移动循环
+							{
+								if(AI_tank[i].model==2 && interval[i+1]++%2==0) //四个坦克中的快速坦克单独使用计数器1,2,3,4
+									MoveAITank( & AI_tank[i]);
+								if(AI_tank[i].model!=2 && interval[i+5]++%3==0) //四个坦克中的慢速坦克单独使用计数器5,6,7,8
+									MoveAITank( & AI_tank[i]);
+							}
+
+							for(int i=0;i<=3;i++){                                   //建立AI坦克部分
+								if(AI_tank[i].alive==0 && AI_tank[i].revive<4 && interval[9]++%90==0)  //一个敌方坦克每局只有4条命
+								{                                               //如果坦克不存活。计时,每次建立有间隔  1750 ms
+									BuildAITank( &position, & AI_tank[i] );     //建立AI坦克（复活）
+									break;                                      //每次循环只建立一个坦克
+								}
+							}
+
+							for(int i=0;i<=3;i++){
+								if(AI_tank[i].alive)
+									BuildAIBullet(&AI_tank[i]);                 //AIshoot自带int自增计数CD,不使用main中的CD interval
+							}
+						}
+
+
+						if(my_tank.alive==0 && interval[10]++%100==0 && my_tank.revive < MAX_LIFE)
+							BuildMyTank( &my_tank );
+						if(my_tank.alive && interval[11]++%6==0 )
+							keyboardtank ();
+						if(my_tank.alive && interval[12]++%7==0 )
+							keyboardbullet ();
+			
+						keyboardmenu();
+						Sleep(5);
+					}
+				}
+			}
+
+			if(sel == 2){
+				
+			}
+		
 		}
 	}
+	if( state == 2){
+		if (GetAsyncKeyState( 0x1B )& 0x8000){  // Esc键
+			exit(0);                                //退出程序函数
+		}
+		else if (GetAsyncKeyState( 0x20 )& 0x8000){  //空格
+			Stop();
+		}else	if (speed>1 && GetAsyncKeyState( VK_PRIOR )& 0x8000)   // PgUp键
+			{
+				Sleep(200);
+				speed--;
+				GoToxy(102,11);           //在副屏幕打印出当前速度
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY|FOREGROUND_BLUE|FOREGROUND_RED);
+				printf("%d ",11-speed);   //副屏幕显示的速度为1~10
+			}
+			else if (speed<10 && GetAsyncKeyState( VK_NEXT )& 0x8000)  // PgDown 键
+			{
+				Sleep(200);
+				speed++;
+				GoToxy(102,11);           //在副屏幕打印出当前速度
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY|FOREGROUND_BLUE|FOREGROUND_RED);
+				printf("%d ",11-speed);   //副屏幕显示的速度为1~10
+			}
+	}
+}
 

@@ -20,6 +20,7 @@ extern int level;      //游戏关卡数
 extern int score;      //游戏分数
 extern int remain_enemy; //剩余敌人(未出现的敌人)
 extern int state;
+extern int sel;
 
 extern char *tank_figure[][3][4];
 
