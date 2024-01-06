@@ -52,7 +52,7 @@ void BuildMyTank (Tank* my_tank) //建立我的坦克
     my_tank->color=1;
     my_tank->alive=1;
     my_tank->my=1;
-	my_tank->CD=7;
+	my_tank->CD=player_cd;
     PrintTank (*my_tank) ;   //打印我的坦克
 }
 

@@ -115,6 +115,13 @@ void ClearMainScreen()  //主屏幕清屏函数，因使用system("cls");再打�
 			printf("                                                                              ");
 		}
 	}
+	if(state == 1){
+		for(int i=1;i<40;i++)
+		{
+			GoToxy(2,i);
+			printf("                                                                                                                ");
+		}
+	}
 }
 
 void HideCursor()  //隐藏光标
@@ -124,13 +131,7 @@ void HideCursor()  //隐藏光标
 }
 
 void displaymenu(){
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-	printf("▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁");
-	for(int i=0;i<39;i++)
-	{
-	    printf("|                                                                                                              |");
-	}
-	printf("▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔");
+	MenuFrame();
 	GoToxy(50,16);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_RED|FOREGROUND_INTENSITY);
 	printf("经典坦克大战");
@@ -151,14 +152,24 @@ void displaymenu(){
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_INTENSITY);
     printf("  ==================  ");
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE|FOREGROUND_RED|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
-	GoToxy(52,18);
+	GoToxy(52,17+sel);
 	printf("<<");
-	GoToxy(58,18);
+	GoToxy(58,17+sel);
 	printf(">>");
 	state = 0;
 }
 
-
+void MenuFrame(){
+	GoToxy(0,0);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
+	printf("▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁");
+	for(int i=0;i<39;i++)
+	{
+	    printf("|                                                                                                              |");
+	}
+	printf("▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔");
+	return;
+}
 
 void GoToxy(int x,int y)  //光标移动函数，X表示横坐标，Y表示纵坐标。
 {

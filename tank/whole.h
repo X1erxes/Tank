@@ -21,6 +21,10 @@ extern int score;      //游戏分数
 extern int remain_enemy; //剩余敌人(未出现的敌人)
 extern int state;
 extern int sel;
+extern int sel2;
+extern int player_cd;
+extern int ai_cd;
+extern int enemy_num;
 
 extern char *tank_figure[][3][4];
 

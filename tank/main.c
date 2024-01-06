@@ -43,14 +43,16 @@
  
 int main ()                               //主函数
 {
-
+	int record = 1;
 	srand(time(NULL)); //设置随机数种子(若不设置种子而调用rand会使每次运行的随机数序列一致)随机数序列指:如首次调用rand得到1,第二次得2,第三次3,则此次随机数序列为1,2,3
 	HideCursor();                         //隐藏光标
 	system("mode con cols=112 lines=43"); //控制窗口大小
 	displaymenu();
 	while(1){
-		keyboardmenu();
-		Sleep(188);
+		if(record++ % 100 == 0){
+			keyboardmenu();
+			Sleep(105);
+		}
 	}
 	return 0;
 }

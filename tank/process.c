@@ -5,7 +5,7 @@
 
 void Initialize()      //初始化
 {
-	remain_enemy=16;
+	remain_enemy=enemy_num;
 	my_tank.revive=0;  //我的坦克复活次数为0
 	position=0;
 	bul_num=0;
@@ -23,7 +23,7 @@ void Initialize()      //初始化
 		AI_tank [i].stop=0;
 		AI_tank [i].num=i;
 		AI_tank [i].my=0;
-		AI_tank [i].CD=13;
+		AI_tank [i].CD=ai_cd-2;
 	}
 	GoToxy(97,2);                        //在副屏幕上关卡数
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY|FOREGROUND_RED|FOREGROUND_GREEN);

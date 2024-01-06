@@ -17,6 +17,10 @@ int score=0;      //游戏分数
 int remain_enemy; //剩余敌人(未出现的敌人)
 int state = 0;    //界面状态
 int sel = 1;      //
+int sel2 = 1;
+int player_cd = 7;
+int ai_cd = 15;
+int enemy_num = 16;
 
 char *tank_figure[4][3][4]= 
 {
@@ -45,6 +49,6 @@ char *tank_figure[4][3][4]=
 char MenuText[menu_num][menu_length]={
         "开始",
         "载入",
-        "保存",
-        "设置"
+        "设置",
+        "退出"
 };

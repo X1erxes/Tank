@@ -5,3 +5,4 @@ void ClearMainScreen();      //主屏幕清屏函数∵system("cls")后打印框
 void HideCursor();           //隐藏光标
 void GoToxy(int x,int y);    //光标移动
 void displaymenu();
+void MenuFrame();
