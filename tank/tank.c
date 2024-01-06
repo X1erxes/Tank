@@ -1,5 +1,6 @@
 #include "struct.h"
-#include "header.h"
+#include "whole.h"
+
 #include <windows.h>
 #include <stdio.h>
 

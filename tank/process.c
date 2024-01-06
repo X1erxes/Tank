@@ -1,5 +1,6 @@
 #include <windows.h>
-#include "header.h"
+
+#include "whole.h"
 #include "define.h"
 
 void Initialize()      //初始化
@@ -10,7 +11,7 @@ void Initialize()      //初始化
 	bul_num=0;
 	GetMap();
 	BuildMyTank( &my_tank );
-	for(int i=0;i<12;i++)     //子弹初始化
+	for(int i=0;i<20;i++)     //子弹初始化
 	{
 		bullet [i].exist=0;
 		bullet [i].initial=0;
@@ -22,7 +23,7 @@ void Initialize()      //初始化
 		AI_tank [i].stop=0;
 		AI_tank [i].num=i;
 		AI_tank [i].my=0;
-		AI_tank [i].CD=0;
+		AI_tank [i].CD=13;
 	}
 	GoToxy(97,2);                        //在副屏幕上关卡数
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY|FOREGROUND_RED|FOREGROUND_GREEN);

@@ -1,7 +1,6 @@
-#include "define.h"
 #ifndef STRUCT
 #define STRUCT
-
+#include "define.h"
 
 typedef struct      //坦克结构体
 {

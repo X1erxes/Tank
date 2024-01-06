@@ -1,6 +1,7 @@
 #include "define.h"
 #include "struct.h"
-#include "header.h"
+#include "whole.h"
+
 #include<windows.h>
 
 
@@ -16,7 +17,7 @@ void BuildAIBullet(Tank *tank)   //AI子弹发射(建立)含有对my_tank的读�
 	}
 	else
 		tank->CD++;
-	if(tank->CD >= 14)       //AI强化部分，在冷却到达一定范围即可使用
+	if(tank->CD >= 10)       //AI强化部分，在冷却到达一定范围即可使用
 	{
 		if(tank->y==38 )     //如果坦克在底部(这个最优先)
 		{

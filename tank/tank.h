@@ -1,7 +1,7 @@
 #ifndef TANK
 #define TANK
 #include "struct.h"
-#include "header.h"
+#include "whole.h"
 
 void BuildAITank (int* position, Tank* AI_tank); //建立AI坦克
 void BuildMyTank (Tank *my_tank);                //建立我的坦克
