@@ -33,4 +33,14 @@ typedef struct      //子弹结构体
 	int my;        //区分AI子弹与玩家子弹的标记,0为AI子弹，1为玩家（我的）子弹
 } Bullet;
 
+typedef struct{
+	char name[1000];
+	int level_num;
+	int score_num;
+	int diffi_num;
+	int tank_num;
+	int my_cd_num;
+	int ai_cd_num;
+} Player;
+
 #endif

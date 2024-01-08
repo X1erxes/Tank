@@ -8,7 +8,7 @@
 extern LevInfo level_info[];
 extern Tank AI_tank[] , my_tank;
 extern Bullet bullet[];  //考虑到地图上不太可能同时存在20颗子弹，所以数组元素设置20个
-
+extern Player p1;
 
 //全局变量
 extern int map[][41];  //地图二维数组

@@ -110,8 +110,6 @@ void GameOver(int home)
 		}
 		if (GetAsyncKeyState( 0xD )& 0x8000)  //回车键
 		{
-//			system("cls");       //清屏,这里清屏后再次打印框架有一定几率造成框架上移一行的bug，因此选用自建清屏函数
-//			Frame ();            //重新打印游戏框架
 			score-=500;          //分数-500
 			ClearMainScreen();   //主屏清屏函数，无需再次打印框架
 			Initialize();        //从本关重新开始
@@ -139,8 +137,6 @@ void NextLevel()
 				printf("等待下关");
 				GoToxy(87,17);
 				printf("请按回车键进入下一关!");
-				GoToxy(88,18);
-				printf("或按 Esc键退出游戏!");
 				if(++color==8)	
 					color=1;
 			}
@@ -154,8 +150,6 @@ void NextLevel()
 				Initialize();        //初始化从下一关开始,level已++
 				break;
 			}
-			else if(GetAsyncKeyState( 0x1B )& 0x8000)  //Esc键退出	
-				exit(0);
 			Sleep(20);
 		}
 	else   //level>8 通关
@@ -180,4 +174,10 @@ void NextLevel()
 			Sleep(10);
 		}
 }
+
+void SavetoFile(void){
+
+}
+
+
 

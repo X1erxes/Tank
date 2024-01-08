@@ -67,11 +67,17 @@ void keyboardmenu(){
 		}
 		if( (GetAsyncKeyState( 0xD )& 0x8000) && state == 0){
 			if(sel == 1){
+				p1.level_num = 1;
+				p1.score_num = 0;
+				p1.diffi_num = 11-speed;
+				p1.tank_num = enemy_num;
+				p1.my_cd_num = player_cd;
+				p1.ai_cd_num = ai_cd;
 				state = 2;
 				system("cls");
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
 				printf("新的玩家名:\n");
-				scanf("%s");
+				printf("%s\n",p1.name);
 				printf("按回车键开始游戏！");
 				getchar();
 				if( getchar() ){
@@ -91,14 +97,16 @@ void keyboardmenu(){
 								if(AI_tank[i].model!=2 && interval[i+5]++%3==0) //四个坦克中的慢速坦克单独使用计数器5,6,7,8
 									MoveAITank( & AI_tank[i]);
 							}
+						
 
-							for(int i=0;i<=3;i++){                                   //建立AI坦克部分
-								if(AI_tank[i].alive==0 && AI_tank[i].revive<(enemy_num/4+1) && interval[9]++%90==0)  //一个敌方坦克每局只有4条命
+							for(int i=0;i<=3;i++){      
+								int sum = AI_tank[0].revive+AI_tank[1].revive+AI_tank[2].revive+AI_tank[3].revive;                             //建立AI坦克部分
+								if(AI_tank[i].alive==0 && sum < enemy_num && interval[9]++%90==0)  
 								{                                               //如果坦克不存活。计时,每次建立有间隔  1750 ms
 									BuildAITank( &position, & AI_tank[i] );     //建立AI坦克（复活）
 									break;                                      //每次循环只建立一个坦克
 								}
-								if(!AI_tank[0].alive && !AI_tank[1].alive && !AI_tank[2].alive && !AI_tank[3].alive && AI_tank[i].revive< enemy_num/4 ){
+								if(!AI_tank[0].alive && !AI_tank[1].alive && !AI_tank[2].alive && !AI_tank[3].alive && sum < enemy_num ){
 									BuildAITank( &position, & AI_tank[i] );     //建立AI坦克（复活）
 									break;                                      //每次循环只建立一个坦克
 								}
@@ -161,19 +169,14 @@ void keyboardmenu(){
 	}
 	if( state == 2){
 		if (GetAsyncKeyState( 0x1B )& 0x8000){  // Esc键
-			int color=1,timing=0;
 			system("cls");
 			MenuFrame();
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_INTENSITY);
+			GoToxy(54,16);
+			printf("保存成功！");
+			GoToxy(52,22);
+			printf("按下回车以退出");
 			while(1){
-				if(timing++%100==0){
-				ColorChoose(color);
-				GoToxy(54,16);
-				printf("保存成功！");
-				GoToxy(52,22);
-				printf("按下回车以退出");
-				if(++color==8) color=1;
-				Sleep(200);
-				}
 				if (GetAsyncKeyState( 0xD )& 0x8000) exit(0);
 			}
 		}

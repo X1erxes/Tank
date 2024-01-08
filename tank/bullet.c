@@ -191,7 +191,7 @@ void BulletHit(Bullet* bullet)  //含有Tank全局变量的修改,子弹间的�
 			ClearTank(AI_tank[num].x , AI_tank[num].y);      //清除该坦克
 		}
 		bullet->exist=0;
-		score+=(100*(11-speed));
+		score += (100 * (11-speed) );
 		GoToxy(102,5);             //在副屏幕上打印出分数
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY|FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE);
 		printf("%d ",score);
