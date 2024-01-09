@@ -1,6 +1,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 
 #include "whole.h"
 #include "define.h"
@@ -8,6 +9,12 @@
 
 void Initialize()      //初始化
 {
+
+	time_t t;
+	struct tm *lt;
+	time(&t); //获取时间戳。
+	lt=localtime(&t);//转为时间结构。
+
 	Player *temp = head;
 	while(temp != NULL){
 		if(!strcmp(temp->name,name)){
@@ -17,6 +24,11 @@ void Initialize()      //初始化
 			temp->tank_num = enemy_num;
 			temp->my_cd_num = player_cd;
 			temp->ai_cd_num = ai_cd;
+			temp->year = lt->tm_year+1900;
+			temp->month = lt->tm_mon+1;
+			temp->day = lt->tm_mday;
+			temp->hour = lt->tm_hour;
+			temp->min = lt->tm_min;
 			break;
 		}
 		temp = temp->next;
@@ -34,6 +46,11 @@ void Initialize()      //初始化
 		m1->my_cd_num = player_cd;
 		m1->ai_cd_num = ai_cd;
 		m1->next = NULL;
+		m1->year = lt->tm_year+1900;
+		m1->month = lt->tm_mon+1;
+		m1->day = lt->tm_mday;
+		m1->hour = lt->tm_hour;
+		m1->min = lt->tm_min;
 		temp->next = m1;
 		sum++;
 	}
@@ -145,7 +162,7 @@ void GameOver(int home)
 		}
 		if (GetAsyncKeyState( 0xD )& 0x8000)  //回车键
 		{
-			score-=500;          //分数-500
+			score-= 1000*(11-speed);
 			ClearMainScreen();   //主屏清屏函数，无需再次打印框架
 			Initialize();        //从本关重新开始
 			break;
@@ -209,7 +226,4 @@ void NextLevel()
 			Sleep(10);
 		}
 }
-
-
-
 

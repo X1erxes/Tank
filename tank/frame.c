@@ -2,10 +2,10 @@
 
 #include "whole.h"
 
-void Frame ()     //打印游戏主体框架
-{                 //SetConsoleTextAttribute为设置文本颜色和文本背景颜色函数
+void Frame (void)     //打印游戏主体框架
+{                 
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_INTENSITY);
-	printf("  ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁  ");
+	printf("  ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁  ");//顶部
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY|FOREGROUND_BLUE); 
 	printf("  ▂▂▂▂▂▂▂▂▂▂▂▂▂ \n");
 
@@ -14,13 +14,13 @@ void Frame ()     //打印游戏主体框架
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_INTENSITY|FOREGROUND_RED|FOREGROUND_INTENSITY);
 	    printf("▕                                                                              ▏");
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY|FOREGROUND_BLUE); 
-		printf(" |                          |\n");
+		printf(" |                          |\n");//中部
 	}
 
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_INTENSITY|FOREGROUND_RED|FOREGROUND_INTENSITY);
 	printf("▕                                                                              ▏");
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY|FOREGROUND_BLUE); 
-	printf(" |═════════════|\n");
+	printf(" |═════════════|\n");//右框框
 
 
 	for(int i=0;i<24;i++)
@@ -28,14 +28,15 @@ void Frame ()     //打印游戏主体框架
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_INTENSITY|FOREGROUND_RED|FOREGROUND_INTENSITY);
 	    printf("▕                                                                              ▏");
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY|FOREGROUND_BLUE); 
-		printf(" |                          |\n");
+		printf(" |                          |\n");//中部
 	}
 
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_INTENSITY|FOREGROUND_RED|FOREGROUND_INTENSITY);
 	printf("  ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔  ");
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY| FOREGROUND_BLUE); 
-	printf(" ﹊﹊﹊﹊﹊﹊﹊﹊﹊﹊﹊﹊﹊﹊\n");
+	printf(" ﹊﹊﹊﹊﹊﹊﹊﹊﹊﹊﹊﹊﹊﹊\n");//底部
 	SideScreen ();  //打印副屏幕
+	return;
 }
 
 void SideScreen ()  //副屏幕 行(84起,110末,若双字符宽则在108打印最后一个字）列(11上屏末,13下屏初,39下屏末。为美观最好打在38)
@@ -76,6 +77,9 @@ void SideScreen ()  //副屏幕 行(84起,110末,若双字符宽则在108打印�
 	printf("回车键 暂停游戏");
 	GoToxy(90,29);
 	printf("Esc键  退出游戏");
+	GoToxy(90,31);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY|FOREGROUND_GREEN|FOREGROUND_BLUE|FOREGROUND_RED);
+	printf("玩家名：%s",name);
 }
 
 void ColorChoose(int color)   //颜色选择函数
@@ -108,39 +112,37 @@ void ColorChoose(int color)   //颜色选择函数
 
 void ClearMainScreen()  //主屏幕清屏函数，因使用system("cls");再打印框架有一定几率造成框架上移一行的错误，所以单独编写清屏函数
 {
-	if(state == 1){
-		for(int i=1;i<40;i++)
-		{
-			GoToxy(2,i);
-			printf("                                                                                                                ");
-		}
+	for(int i=1;i<40;i++)
+	{
+		GoToxy(2,i);
+		printf("                                                                              ");
 	}
 }
 
-void HideCursor()  //隐藏光标
-{                  //CONSOLE_CURSOR_INFO结构体包含控制台光标的信息,DWORD dwSize光标百分比厚度（1~100）和BOOL bVisible光标是否可见
+void HideCursor(void)  //隐藏光标
+{        
 	CONSOLE_CURSOR_INFO cursor_info= {1,0} ;
-	SetConsoleCursorInfo( GetStdHandle(STD_OUTPUT_HANDLE) , &cursor_info ); //SetConsoleCursorInfo用来设置指定的控制台光标的大小和可见性。
+	SetConsoleCursorInfo( GetStdHandle(STD_OUTPUT_HANDLE) , &cursor_info );
+	return;
 }
 
 void displaymenu(){
-	MenuFrame();
+	MenuFrame();//主菜单框架
 	GoToxy(50,16);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_RED|FOREGROUND_INTENSITY);
 	printf("经典坦克大战");
     GoToxy(45,17);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_INTENSITY);
     printf("  ==================  ");
-
     GoToxy(54,18);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_RED|FOREGROUND_BLUE|FOREGROUND_GREEN);
-	printf("%s",MenuText[0]);
+	printf("%s",MenuText[0]);//开始
 	GoToxy(54,19);
-	printf("%s",MenuText[1]);
+	printf("%s",MenuText[1]);//载入
 	GoToxy(54,20);
-	printf("%s",MenuText[2]);
+	printf("%s",MenuText[2]);//设置
 	GoToxy(54,21);
-	printf("%s",MenuText[3]);
+	printf("%s",MenuText[3]);//退出
 	GoToxy(45,22);
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_INTENSITY);
     printf("  ==================  ");
@@ -149,7 +151,7 @@ void displaymenu(){
 	printf("<<");
 	GoToxy(58,17+sel);
 	printf(">>");
-	state = 0;
+	state = 0;//第一阶段
 }
 
 void MenuFrame(){

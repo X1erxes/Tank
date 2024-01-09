@@ -151,9 +151,13 @@ Start:
 				printf("玩家子弹冷却：%2d",temp->my_cd_num);
 				GoToxy(47,25);
 				printf("电脑子弹冷却：%2d",temp->ai_cd_num);
+				GoToxy(47,27);
+				printf("日期：%04d.%02d.%02d",temp->year,temp->month,temp->day);
 				GoToxy(47,29);
+				printf("时间：%02d:%02d",temp->hour,temp->min);
+				GoToxy(47,33);
 				printf("按下空格继续");
-				GoToxy(45,27);
+				GoToxy(45,31);
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_INTENSITY);
 				printf("======================");
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE|FOREGROUND_RED|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
@@ -191,6 +195,7 @@ Start:
 			}
 		}
 	}
+
 	if( state == 2){
 		if (GetAsyncKeyState( 0x1B )& 0x8000){  // Esc键
 			system("cls");
@@ -244,6 +249,10 @@ Start:
 			printf("玩家子弹冷却：%2d",temp->my_cd_num);
 			GoToxy(47,25);
 			printf("电脑子弹冷却：%2d",temp->ai_cd_num);
+			GoToxy(47,27);
+			printf("日期：%04d.%02d.%02d",temp->year,temp->month,temp->day);
+			GoToxy(47,29);
+			printf("时间：%02d:%02d",temp->hour,temp->min);
 		}
 
 		if( (GetAsyncKeyState( VK_LEFT )& 0x8000) && state == 3 && sel3 > 1){
@@ -265,6 +274,10 @@ Start:
 			printf("玩家子弹冷却：%2d",temp->my_cd_num);
 			GoToxy(47,25);
 			printf("电脑子弹冷却：%2d",temp->ai_cd_num);
+			GoToxy(47,27);
+			printf("日期：%04d.%02d.%02d",temp->year,temp->month,temp->day);
+			GoToxy(47,29);
+			printf("时间：%02d:%02d",temp->hour,temp->min);
 		}
 	
 		if( (GetAsyncKeyState( 0x20 )& 0x8000) && state == 3 ){
@@ -277,6 +290,7 @@ Start:
 			player_cd = temp->my_cd_num;
 			ai_cd = temp->ai_cd_num;
 			system("cls");
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
 			goto Start;
 		}
 	
@@ -372,4 +386,3 @@ Start:
 
 
 }
-

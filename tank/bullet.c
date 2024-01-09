@@ -202,7 +202,7 @@ void BulletHit(Bullet* bullet)  //含有Tank全局变量的修改,子弹间的�
 		ClearTank(my_tank.x , my_tank.y);
 		bullet->exist=0;
 		my_tank.revive++;      //我的坦克复活次数+1(∵我的坦克复活次数与生命值有关∴放在这里自减)
-		score-=100;            //分数减少
+		score-=100*(11-speed); //分数减少
 		GoToxy(102,5);         //在副屏幕上打印出分数
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY|FOREGROUND_RED|FOREGROUND_GREEN|FOREGROUND_BLUE);
 		printf("%d   ",score);
@@ -210,8 +210,6 @@ void BulletHit(Bullet* bullet)  //含有Tank全局变量的修改,子弹间的�
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY|FOREGROUND_GREEN);
 		printf("%d   ", MAX_LIFE-my_tank.revive);
 	}
-//	else if(bullet->my==0 && map[y][x]>=100 && map[y][x]<104) //敌方子弹击中敌方坦克,可以设置两种子弹运行方式,这种暂时不用
-//		bullet->exist=0;
 	else if(map[y][x]==9)      //子弹碰到家(无论是谁的子弹)
 	{
 		bullet->exist=0;
