@@ -69,8 +69,8 @@ void SideScreen ()  //副屏幕 行(84起,110末,若双字符宽则在108打印�
 	printf("WSAD  移动");
 	GoToxy(93,21);
 	printf("J 键 射击");
-	GoToxy(85,23);
-	printf("PgUp PgDown 调整游戏难度");
+	GoToxy(90,23);
+	printf("] [ 调整游戏难度");
 	GoToxy(90,25);
 	printf("游戏难度范围1~10");
 	GoToxy(90,27);

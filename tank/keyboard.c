@@ -211,7 +211,7 @@ Start:
 		}
 		else if (GetAsyncKeyState( 0x20 )& 0x8000){  //空格
 			Stop();
-		}else	if (speed>1 && GetAsyncKeyState( VK_PRIOR )& 0x8000)   // PgUp键
+		}else	if (speed>1 && GetAsyncKeyState( 0xDD )& 0x8000)   // ]键
 			{
 				Sleep(200);
 				speed--;
@@ -219,7 +219,7 @@ Start:
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY|FOREGROUND_BLUE|FOREGROUND_RED);
 				printf("%d ",11-speed);   //副屏幕显示的速度为1~10
 			}
-			else if (speed<10 && GetAsyncKeyState( VK_NEXT )& 0x8000)  // PgDown 键
+			else if (speed<10 && GetAsyncKeyState( 0xDB )& 0x8000)  // [键
 			{
 				Sleep(200);
 				speed++;
