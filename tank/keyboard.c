@@ -36,6 +36,7 @@ void keyboardbullet (){
 }
 
 void keyboardmenu(){
+	Player *temp = head;
 	if(state == 0){
 		if( (GetAsyncKeyState( VK_DOWN )& 0x8000) && state == 0){
 			if(sel < menu_num){
@@ -67,20 +68,16 @@ void keyboardmenu(){
 		}
 		if( (GetAsyncKeyState( 0xD )& 0x8000) && state == 0){
 			if(sel == 1){
-				p1.level_num = 1;
-				p1.score_num = 0;
-				p1.diffi_num = 11-speed;
-				p1.tank_num = enemy_num;
-				p1.my_cd_num = player_cd;
-				p1.ai_cd_num = ai_cd;
-				state = 2;
+				state = 1;
 				system("cls");
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
 				printf("新的玩家名:\n");
-				printf("%s\n",p1.name);
-				printf("按回车键开始游戏！");
+				scanf("%s",name);
+Start:
+				printf("%s，欢迎来到坦克的世界\n按回车键开始游戏！",name);
 				getchar();
 				if( getchar() ){
+					state = 2;
 					unsigned int interval[13]={1,1,1,1,1,1,1,1,1,1,1,1,1} ;  //间隔计数器数组，用于控制速度
 					Frame ();                             //打印游戏主体框架
 					Initialize();                         //初始化，全局变量level初值便是1 
@@ -136,6 +133,33 @@ void keyboardmenu(){
 				state = 3;
 				system("cls");
 				MenuFrame();
+				GoToxy(45,11);
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_INTENSITY);
+   				printf("======================");
+				GoToxy(47,13);
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
+				printf("玩家名：%-100s",temp->name);
+				GoToxy(47,15);
+				printf("关卡：%-10d",temp->level_num);
+				GoToxy(47,17);
+				printf("分数：%-10d",temp->score_num);
+				GoToxy(47,19);
+				printf("难度：%-10d",temp->diffi_num);
+				GoToxy(47,21);
+				printf("敌坦克数量：%2d",temp->tank_num);
+				GoToxy(47,23);
+				printf("玩家子弹冷却：%2d",temp->my_cd_num);
+				GoToxy(47,25);
+				printf("电脑子弹冷却：%2d",temp->ai_cd_num);
+				GoToxy(47,29);
+				printf("按下空格继续");
+				GoToxy(45,27);
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_INTENSITY);
+				printf("======================");
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE|FOREGROUND_RED|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
+				GoToxy(43,13);
+				printf(">>");
+
 			}
 
 			if(sel == 3){
@@ -198,6 +222,69 @@ void keyboardmenu(){
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_INTENSITY|FOREGROUND_BLUE|FOREGROUND_RED);
 				printf("%d ",11-speed);   //副屏幕显示的速度为1~10
 			}
+	}
+
+	if( state == 3){
+		if( (GetAsyncKeyState( VK_RIGHT )& 0x8000) && state == 3 && sel3 < sum){
+			temp = head;
+			sel3++;
+			for(int i = 1;i < sel3;i++) temp = temp->next;
+			GoToxy(47,13);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
+			printf("玩家名：%-100s",temp->name);
+			GoToxy(47,15);
+			printf("关卡：%-10d",temp->level_num);
+			GoToxy(47,17);
+			printf("分数：%-10d",temp->score_num);
+			GoToxy(47,19);
+			printf("难度：%-10d",temp->diffi_num);
+			GoToxy(47,21);
+			printf("敌坦克数量：%2d",temp->tank_num);
+			GoToxy(47,23);
+			printf("玩家子弹冷却：%2d",temp->my_cd_num);
+			GoToxy(47,25);
+			printf("电脑子弹冷却：%2d",temp->ai_cd_num);
+		}
+
+		if( (GetAsyncKeyState( VK_LEFT )& 0x8000) && state == 3 && sel3 > 1){
+			temp = head;
+			sel3--;
+			for(int i = 1;i < sel3;i++) temp = temp->next;
+			GoToxy(47,13);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN|FOREGROUND_RED|FOREGROUND_BLUE|FOREGROUND_INTENSITY);
+			printf("玩家名：%-100s",temp->name);
+			GoToxy(47,15);
+			printf("关卡：%-10d",temp->level_num);
+			GoToxy(47,17);
+			printf("分数：%-10d",temp->score_num);
+			GoToxy(47,19);
+			printf("难度：%-10d",temp->diffi_num);
+			GoToxy(47,21);
+			printf("敌坦克数量：%2d",temp->tank_num);
+			GoToxy(47,23);
+			printf("玩家子弹冷却：%2d",temp->my_cd_num);
+			GoToxy(47,25);
+			printf("电脑子弹冷却：%2d",temp->ai_cd_num);
+		}
+	
+		if( (GetAsyncKeyState( 0x20 )& 0x8000) && state == 3 ){
+			for(int i = 1;i < sel3;i++) temp = temp->next;
+			strcpy(name,temp->name);
+			level = temp->level_num;
+			score = temp->score_num;
+			speed = 11 - temp->diffi_num;
+			enemy_num = temp->tank_num;
+			player_cd = temp->my_cd_num;
+			ai_cd = temp->ai_cd_num;
+			system("cls");
+			goto Start;
+		}
+	
+		if( (GetAsyncKeyState( 0x1B )& 0x8000) && state == 3){
+			system("cls");
+			displaymenu();
+			state = 0;
+		}
 	}
 
 	if( state == 5 ){
@@ -279,6 +366,7 @@ void keyboardmenu(){
 			state = 0;
 		}
 	
+
 	}
 
 

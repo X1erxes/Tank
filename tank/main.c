@@ -8,6 +8,7 @@
 #include "map.h"
 #include "keyboard.h"
 #include "process.h"
+#include "savedata.h"
 
 
                            //里规格：长39*2=78 （真坐标）(假坐标宽为39)  高39
@@ -47,6 +48,7 @@ int main ()                               //主函数
 	srand(time(NULL)); //设置随机数种子(若不设置种子而调用rand会使每次运行的随机数序列一致)随机数序列指:如首次调用rand得到1,第二次得2,第三次3,则此次随机数序列为1,2,3
 	HideCursor();                         //隐藏光标
 	system("mode con cols=112 lines=43"); //控制窗口大小
+	GetfromFile();
 	displaymenu();
 	while(1){
 		if(record++ % 100 == 0){

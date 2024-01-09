@@ -4,7 +4,7 @@
 Tank AI_tank[4] , my_tank;  //my_tank为我的坦克，Ai_tank 代表AI坦克
 LevInfo level_info[MAX_LEVEL] = {{-1,-1},{3,-1},{-1,3},{2,3},{2,3},{2,3},{2,3},{2,3}};   //初始化，-1代表没有该类型坦克
 Bullet bullet[BULLET_NUM];  //考虑到地图上不太可能同时存在20颗子弹，所以数组元素设置20个
-Player p1;
+Player *head;
 
 //全局变量
 int map[41][41];  //地图二维数组
@@ -18,9 +18,12 @@ int remain_enemy; //剩余敌人(未出现的敌人)
 int state = 0;    //界面状态
 int sel = 1;      //
 int sel2 = 1;
+int sel3 = 1;
 int player_cd = 7;
 int ai_cd = 15;
 int enemy_num = 16;
+int sum = 0;
+char name[1000];
 
 char *tank_figure[4][3][4]= 
 {

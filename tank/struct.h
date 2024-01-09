@@ -41,6 +41,7 @@ typedef struct{
 	int tank_num;
 	int my_cd_num;
 	int ai_cd_num;
+	struct Player *next;
 } Player;
 
 #endif

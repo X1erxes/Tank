@@ -1,10 +1,45 @@
 #include <windows.h>
+#include <stdio.h>
+#include <string.h>
 
 #include "whole.h"
 #include "define.h"
+#include "savedata.h"
 
 void Initialize()      //初始化
 {
+	Player *temp = head;
+	while(temp != NULL){
+		if(!strcmp(temp->name,name)){
+			temp->level_num = level;
+			temp->score_num = score;
+			temp->diffi_num = 11-speed;
+			temp->tank_num = enemy_num;
+			temp->my_cd_num = player_cd;
+			temp->ai_cd_num = ai_cd;
+			break;
+		}
+		temp = temp->next;
+	}
+	
+	if(temp == NULL){
+		temp = head;
+		while(temp->next != NULL) temp = temp->next;
+		Player *m1 = (Player *)malloc(LEN);
+		strcpy(m1->name,name);
+		m1->level_num = level;
+		m1->score_num = score;
+		m1->diffi_num = 11-speed;
+		m1->tank_num = enemy_num;
+		m1->my_cd_num = player_cd;
+		m1->ai_cd_num = ai_cd;
+		m1->next = NULL;
+		temp->next = m1;
+		sum++;
+	}
+
+	SavetoFile();
+
 	remain_enemy=enemy_num;
 	my_tank.revive=0;  //我的坦克复活次数为0
 	position=0;
@@ -175,9 +210,6 @@ void NextLevel()
 		}
 }
 
-void SavetoFile(void){
-
-}
 
 
 

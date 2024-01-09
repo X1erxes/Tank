@@ -108,13 +108,6 @@ void ColorChoose(int color)   //颜色选择函数
 
 void ClearMainScreen()  //主屏幕清屏函数，因使用system("cls");再打印框架有一定几率造成框架上移一行的错误，所以单独编写清屏函数
 {
-	if(state == 2){
-		for(int i=1;i<40;i++)
-		{
-			GoToxy(2,i);
-			printf("                                                                              ");
-		}
-	}
 	if(state == 1){
 		for(int i=1;i<40;i++)
 		{
