@@ -77,14 +77,28 @@ void BulidPath(char path[]){
 
 void StartFile(void){
 	FILE *fp;
-	char path[10000];
+	char path[10000],test[1000] = "\0";
 	BulidPath(path);
+	fp = fopen(path,"r");
+	if(fp == NULL){
 	fp = fopen(path,"w");
+		if(fp == NULL){
+			printf("无法打开文件！\n");
+			return;
+		}
+		if(fclose(fp) == EOF){
+			printf("无法关闭文件！\n");
+			return;
+		}
+	}
+	fp = fopen(path,"a+");
 	if(fp == NULL){
 		printf("无法打开文件！\n");
 		return;
 	}
-	fprintf(fp,"test 1 0 1 16 7 15 2024 1 9 21 10\n");
+	
+	fscanf(fp,"%s",test);
+	if( strlen(test) == 0 ) fprintf(fp,"test 1 0 1 16 7 15 2024 1 9 21 10\n");
 	if(fclose(fp) == EOF){
 		printf("无法关闭文件！\n");
 		return;
